@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """ First draft
-    Planned for 0.0.1: Syntax Highlighting and basic editor actions
+    Planned for 0.0.1 (i like this versioning): Syntax Highlighting and basic editor actions
 """
 
 import sys
