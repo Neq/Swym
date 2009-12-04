@@ -53,8 +53,8 @@ class MainWindow(QtGui.QMainWindow):
         self.connect(newFileAct, QtCore.SIGNAL("triggered()"), self.newFile)
         fileMenu.addAction(newFileAct)
         
-        openFileAct = QtGui.QAction(self.tr("&Open..."), self)
-        openFileAct.setShortcut(QtGui.QKeySequence(self.tr("Ctrl+O", "File|Open")))
+        openFileAct = QtGui.QAction(self.tr("&Open File"), self)
+        openFileAct.setShortcut(QtGui.QKeySequence(self.tr("Ctrl+O", "File|Open File")))
         self.connect(openFileAct, QtCore.SIGNAL("triggered()"), self.openFile)
         fileMenu.addAction(openFileAct)
     
