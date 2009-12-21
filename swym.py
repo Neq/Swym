@@ -40,6 +40,7 @@ class MainWindow(QtGui.QMainWindow):
     
         self.editor = QtGui.QTextEdit()
         self.editor.setFont(font)
+        self.editor.setHtml("<span style=\"background-color:#ff9900;\">test</span>")
 
         if not self.editor:
             self.setWindowTitle(self.tr("Swym - Untitled *"))
