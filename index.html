@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Swym Editor</title>
+    <script src="codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/mode/javascript/javascript.js"></script>
+    <script src="codemirror/mode/xml/xml.js"></script>
+    <script src="codemirror/mode/css/css.js"></script>
+    <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+      var myCodeMirror = CodeMirror(document.getElementById('content'), {
+        value: "<!DOCTYPE html>\n"+
+        "<html>\n"+
+        "<head>\n"+
+        "</head>\n"+
+        "<body>\n"+
+        "</body>\n"+
+        "</html>",
+        mode:  "htmlmixed"
+      });
+    }
+    </script>
+    <style type="text/css">
+    #left
+        {
+          width: 200px;
+          float: left;
+        }
+
+        #right
+        {
+          margin-left: 200px; /* Change this to whatever the width of your left column is*/
+        }
+
+        .clear
+        {
+          clear: both;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+          <div id="left" style="background-color: red;">
+            Hello
+          </div>
+          <div id="right" style="background-color: blue;">
+            <div id="content" style="background-color: green; height: 10px;">Hello</div>
+          </div>
+          <div class="clear"></div>
+        </div>
+  </body>
+</html>
