@@ -15,13 +15,6 @@
 
     console.log("test");
 
-    ipc.on('show-files', function (event, message) {
-      console.log("show-files "+message+" "+event);
-       message.forEach(function (file) {
-         console.log(file);
-       });
-    });
-
     window.onload = function() {
       var myCodeMirror = CodeMirror(document.getElementById('content'), {
         value: "<!DOCTYPE html>\n"+
@@ -34,36 +27,58 @@
         mode:  "htmlmixed"
       });
 
-
+      ipc.on('show-files', function (event, message) {
+        console.log("show-files "+message+" "+event);
+         message.forEach(function (file) {
+           fileNode = document.createElement('li');
+           fileNode.innerHTML = file;
+           fileNode.addEventListener('click', function() {
+             console.log("file? "+file);
+             text = ipc.sendSync('load-file-content', file);
+             myCodeMirror.setValue(text);
+             document.getElementById('iframe_content').contentWindow.document.write(text);
+             console.log("load-file-content of "+file+": "+text);
+           });
+           document.getElementById('files_menu').appendChild(fileNode);
+           console.log(file);
+         });
+      });
     }
     </script>
     <style type="text/css">
-    #left
-        {
-          width: 200px;
-          float: left;
-        }
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #left {
+        width: 200px;
+        float: left;
+        background-color: #fff;
+        border-right: 1px solid #c0c;
+      }
 
-        #right
-        {
-          margin-left: 200px; /* Change this to whatever the width of your left column is*/
-        }
+      #right {
+        margin-left: 200px;
+        background-color: #fff;
+      }
 
-        .clear
-        {
-          clear: both;
-        }
+      .clear {
+        clear: both;
+      }
     </style>
   </head>
   <body>
     <div id="container">
-          <div id="left" style="background-color: red;">
-            Hello
+          <div id="left">
+            <ul id="files_menu">
+            </ul>
           </div>
           <div id="right" style="background-color: blue;">
             <div id="content" style="background-color: green; height: 10px;">Hello</div>
           </div>
           <div class="clear"></div>
-        </div>
+          <iframe id="iframe_content" contenteditable="true">
+          </iframe>
+    </div>
   </body>
 </html>

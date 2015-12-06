@@ -26,8 +26,6 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1920, height: 1024});
 
-  console.log("teafashdöfoaiwhegöoaiwh");
-
   // fs.readdir('F:\\projects\\swymtest', function(err, files) {
   //   console.log("show files server"+files[0]);
   //   mainWindow.webContents.send('show-files', files);
@@ -43,6 +41,15 @@ app.on('ready', function() {
      console.log("show files server"+files[0]);
      mainWindow.webContents.send('show-files', files);
    });
+  });
+
+  ipc.on('load-file-content', function (event, file) {
+    console.log("File: "+file);
+    fs.readFile('F:\\projects\\swymtest\\'+file, 'utf8', function (err, data) {
+      if (err) throw err;
+      console.log(data);
+      event.returnValue = data;
+    });
   });
 
   // Open the DevTools.
