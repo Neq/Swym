@@ -1,6 +1,8 @@
 const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+const ipc = require("electron").ipcMain;
+const fs = require('fs');
 
 // Report crashes to our server.
 electron.crashReporter.start();
@@ -24,8 +26,24 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1920, height: 1024});
 
+  console.log("teafashdöfoaiwhegöoaiwh");
+
+  // fs.readdir('F:\\projects\\swymtest', function(err, files) {
+  //   console.log("show files server"+files[0]);
+  //   mainWindow.webContents.send('show-files', files);
+  // });
+  //mainWindow.send('show-files', 'nice message');
+
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+  mainWindow.webContents.on('did-finish-load', function() {
+   //mainWindow.webContents.send('show-files', 'whoooooooh!');
+   fs.readdir('F:\\projects\\swymtest', function(err, files) {
+     console.log("show files server"+files[0]);
+     mainWindow.webContents.send('show-files', files);
+   });
+  });
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
